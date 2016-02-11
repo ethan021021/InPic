@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		792955AB1C6D54130085FCF4 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792955AA1C6D54130085FCF4 /* ProfileCollectionViewCell.swift */; };
 		795010161C6414380095FD6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795010151C6414380095FD6F /* AppDelegate.swift */; };
 		795010181C6414380095FD6F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795010171C6414380095FD6F /* LoginViewController.swift */; };
 		7950101B1C6414380095FD6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 795010191C6414380095FD6F /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		5E41E7F81E435E371D89B510 /* Pods-InPic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InPic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-InPic/Pods-InPic.debug.xcconfig"; sourceTree = "<group>"; };
+		792955AA1C6D54130085FCF4 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		795010121C6414380095FD6F /* InPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795010151C6414380095FD6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		795010171C6414380095FD6F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				A24D16C01C6BA5FC00EC2F90 /* Profile.storyboard */,
 				A209D06F1C641D05004D922D /* MainFeedTableViewCell.swift */,
 				A209D0791C643BFB004D922D /* CommentTableViewCell.swift */,
+				792955AA1C6D54130085FCF4 /* ProfileCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				A209D0741C642013004D922D /* DetailImageViewController.swift in Sources */,
 				79EF1E051C693A230021968F /* Constants.swift in Sources */,
 				A209D0641C641738004D922D /* Photo.swift in Sources */,
+				792955AB1C6D54130085FCF4 /* ProfileCollectionViewCell.swift in Sources */,
 				A209D0701C641D05004D922D /* MainFeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

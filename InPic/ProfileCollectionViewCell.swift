@@ -9,6 +9,5 @@
 import UIKit
 
 class ProfileCollectionViewCell: UICollectionViewCell {
-
-    var profileImage = UIImage()
+    @IBOutlet var cellImage: UIImageView!
 }

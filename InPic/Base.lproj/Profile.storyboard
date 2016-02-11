@@ -46,7 +46,7 @@
                                             <constraint firstItem="5QE-jX-LfH" firstAttribute="top" secondItem="qFi-3L-ITP" secondAttribute="top" constant="50" id="soA-yc-qb5"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="cellImage" destination="5QE-jX-LfH" id="Nqo-Pc-1tn"/>
+                                            <outlet property="cellImage" destination="5QE-jX-LfH" id="Hv7-rE-DoW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

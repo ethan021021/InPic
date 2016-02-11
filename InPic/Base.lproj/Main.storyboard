@@ -159,7 +159,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wQL-Lv-sYB">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wQL-Lv-sYB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVn-cO-qri">
@@ -432,10 +432,21 @@
                                                                 <segue destination="dVD-7W-Pqy" kind="show" identifier="likeSegue" id="y17-Uf-b8F"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpB-Dy-eDm">
+                                                            <rect key="frame" x="547" y="17" width="45" height="30"/>
+                                                            <state key="normal" title="Delete">
+                                                                <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="removePhoto" destination="VsP-q9-VaM" eventType="touchUpInside" id="TBW-1s-KqW"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstItem="mpB-Dy-eDm" firstAttribute="top" secondItem="7XP-k0-jAM" secondAttribute="top" constant="17" id="1Uh-QA-PLl"/>
                                                         <constraint firstAttribute="trailing" secondItem="ysg-U9-oye" secondAttribute="trailing" constant="8" id="8wK-cO-fxP"/>
+                                                        <constraint firstAttribute="trailing" secondItem="mpB-Dy-eDm" secondAttribute="trailing" constant="8" id="IWe-ZN-7fV"/>
                                                         <constraint firstItem="ExX-li-MtZ" firstAttribute="leading" secondItem="7XP-k0-jAM" secondAttribute="leading" constant="8" id="Niz-OP-WQr"/>
                                                         <constraint firstAttribute="trailing" secondItem="ExX-li-MtZ" secondAttribute="trailing" constant="8" id="OeJ-pX-FhA"/>
                                                         <constraint firstItem="ysg-U9-oye" firstAttribute="leading" secondItem="7XP-k0-jAM" secondAttribute="leading" constant="8" id="WFc-rK-Svu"/>
@@ -471,6 +482,7 @@
                                         <connections>
                                             <outlet property="buttonLabel" destination="ysg-U9-oye" id="o7i-SG-aP1"/>
                                             <outlet property="cellImageView" destination="Zkv-rQ-nn1" id="1EF-UF-o7p"/>
+                                            <outlet property="deleteButton" destination="mpB-Dy-eDm" id="zs1-az-UnE"/>
                                             <outlet property="likesLabel" destination="ExX-li-MtZ" id="hXD-gc-VMn"/>
                                         </connections>
                                     </tableViewCell>
@@ -542,7 +554,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="axm-QA-eSp"/>
+        <segue reference="whH-UH-Fb4"/>
         <segue reference="y17-Uf-b8F"/>
     </inferredMetricsTieBreakers>
 </document>

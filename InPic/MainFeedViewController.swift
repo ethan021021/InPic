@@ -84,6 +84,7 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
             UID = self.loggedInUser.stringForKey("uid")
             self.tableView.reloadData()
         }
+        print(self.loggedInUser.stringForKey("uid"))
     }
 
     override func didReceiveMemoryWarning() {
