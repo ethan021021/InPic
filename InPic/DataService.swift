@@ -15,6 +15,7 @@ class DataService {
     private var _BASE_REF = Firebase(url: "\(BASE_URL)")
     private var _USER_REF = Firebase(url: "\(BASE_URL)/users")
     private var _PHOTO_REF = Firebase(url: "\(BASE_URL)/photos")
+    private var _POST_REF = Firebase(url: "\(BASE_URL)/posts")
 
     var BASE_REF: Firebase {
         return _BASE_REF
@@ -26,6 +27,10 @@ class DataService {
 
     var PHOTO_REF: Firebase {
         return _PHOTO_REF
+    }
+
+    var POST_REF: Firebase {
+        return _POST_REF
     }
 
     var CURRENT_USER_REF: Firebase {
@@ -40,8 +45,23 @@ class DataService {
         USER_REF.childByAppendingPath(uid).setValue(user)
     }
 
-    func createNewPhoto(photo: String, uid: String, timestamp: String) {
-        let photos = ["string": photo, "uid": uid, "timestamp": timestamp]
-        PHOTO_REF.childByAutoId().setValue(photos)
+    func createNewPost(photo: String, caption: String) {
+        let userid = NSUserDefaults.standardUserDefaults().valueForKey("uid") as! String
+        let postRef = POST_REF.childByAutoId()
+        let timestamp = NSDate(timeIntervalSinceNow: NSTimeInterval())
+        let post = ["userid": userid, "timestamp": "\(timestamp)"]
+        postRef.setValue(post) { (error, firebase) in
+            self.createNewPhoto(photo, caption: caption, postid: firebase.key)
+        }
+    }
+
+    func createNewPhoto(photo: String, caption: String, postid: String) {
+        let photoRef = PHOTO_REF.childByAutoId()
+        let photos = ["string": photo, "caption": caption, "postid": postid]
+        photoRef.setValue(photos) { (error, firebase) in
+            let uPostRef = Firebase(url: "\(BASE_URL)/posts/\(postid)")
+            let updatePost = ["photoid": firebase.key]
+            uPostRef.updateChildValues(updatePost)
+        }
     }
 }

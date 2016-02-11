@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
                     alert.addAction(ok)
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else {
-                    self.loggedInUser.setValue(email, forKey: "user")
+                    self.loggedInUser.setValue(authData.uid!, forKey: "uid")
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })

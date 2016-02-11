@@ -15,6 +15,7 @@ class PostImageViewController: UIViewController {
     var base64String: NSString!
 
     @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet var captionTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +37,7 @@ class PostImageViewController: UIViewController {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
             let imageData: NSData = UIImageJPEGRepresentation(self.postImage!, 1.0)!
             self.base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            let timestamp = NSDate(timeIntervalSinceNow: NSTimeInterval())
-            DataService.dataService.createNewPhoto(self.base64String as String, uid: DataService.dataService.BASE_REF.authData.uid as String, timestamp: "\(timestamp)")
+            DataService.dataService.createNewPost(self.base64String as String, caption: self.captionTextField.text!)
         }
         self.navigationController?.popViewControllerAnimated(true)
     }

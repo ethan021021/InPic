@@ -31,19 +31,22 @@ class CreateAccountViewController: UIViewController {
         let password = passwordText.text
 
         if email != "" && username != "" && password != "" {
-            DataService.dataService.BASE_REF.createUser(email, password: password, withValueCompletionBlock: { (error, result) in
+            DataService.dataService.USER_REF.createUser(email, password: password, withValueCompletionBlock: { (error, result) in
                 if error != nil {
                     let alert = UIAlertController(title: "Sorry!", message: error.localizedDescription, preferredStyle: .Alert)
                     let ok = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alert.addAction(ok)
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else {
-                    DataService.dataService.BASE_REF.authUser(email, password: password, withCompletionBlock: { (error, authData) in
+                    DataService.dataService.USER_REF.authUser(email, password: password, withCompletionBlock: { (error, authData) in
                         let user = ["provider": authData.provider!, "email": email!, "username": username!]
                         DataService.dataService.createNewAccount(authData.uid, user: user)
+                        self.loggedInUser.setValue(authData.uid!, forKey: "uid")
+                        print("AUTH DATA UID: \(authData.uid)")
+                        dispatch_async(dispatch_get_main_queue(), { 
+                            self.performSegueWithIdentifier("unwindToMain", sender: nil)
+                        })
                     })
-                    self.loggedInUser.setValue(email, forKey: "user")
-                    self.performSegueWithIdentifier("unwindToMain", sender: nil)
                 }
             })
         } else {
