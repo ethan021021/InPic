@@ -9,9 +9,13 @@
 import UIKit
 import ImagePicker
 
-class ProfileViewController: UIViewController, ImagePickerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, ImagePickerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     let imagePicker = ImagePickerController()
+   
+    
+    var profileArray = [UIImage]()
     
     @IBOutlet weak var buttonImage: UIButton!
     
@@ -19,7 +23,11 @@ class ProfileViewController: UIViewController, ImagePickerDelegate, UINavigation
         
         super.viewDidLoad()
         
+        self.profileArray.append(UIImage(named: "image")!)
+        
         self.imagePicker.delegate = self
+        
+        self.collectionView.reloadData()
         
         // Do any additional setup after loading the view, typically from a nib.
         self.buttonImage.setImage(UIImage(named: "image"), forState: UIControlState.Normal)    }
@@ -74,4 +82,36 @@ class ProfileViewController: UIViewController, ImagePickerDelegate, UINavigation
         }
     }
     
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProfileCell", forIndexPath: indexPath) as? ProfileCollectionViewCell
+        
+        
+        
+        
+        
+            
+        cell!.cellImage.image = self.profileArray[indexPath.row]
+        
+        
+//        cell!.backgroundColor = UIColor.purpleColor()
+        
+
+        
+        return cell!
+        
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return self.profileArray.count
+        
+    
+    
+    
+    
+    
+}
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
 }
