@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 
 class Post: NSObject {
-    var caption:String?
-    var timestamp:String?
-    var image: UIImage?
+    var timestamp: String?
+    var photo: Photo?
+    var caption: String?
+    var key: String?
+    var userPosted: String?
 }

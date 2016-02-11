@@ -15,6 +15,7 @@ class DataService {
     private var _BASE_REF = Firebase(url: "\(BASE_URL)")
     private var _USER_REF = Firebase(url: "\(BASE_URL)/users")
     private var _PHOTO_REF = Firebase(url: "\(BASE_URL)/photos")
+    private var _POST_REF = Firebase(url: "\(BASE_URL)/posts")
 
     var BASE_REF: Firebase {
         return _BASE_REF
@@ -26,6 +27,10 @@ class DataService {
 
     var PHOTO_REF: Firebase {
         return _PHOTO_REF
+    }
+
+    var POST_REF: Firebase {
+        return _POST_REF
     }
 
     var CURRENT_USER_REF: Firebase {
@@ -40,8 +45,21 @@ class DataService {
         USER_REF.childByAppendingPath(uid).setValue(user)
     }
 
-    func createNewPhoto(photo: String, uid: String, timestamp: String) {
-        let photos = ["string": photo, "uid": uid, "timestamp": timestamp]
-        PHOTO_REF.childByAutoId().setValue(photos)
+    func createNewPost(caption: String, timestamp: String, photo: String, userposted: String)
+    {
+        let post = ["caption": caption, "timestamp": timestamp, "userposted": userposted]
+        POST_REF.childByAutoId().setValue(post) { (error, firebase) in
+            if error != nil {
+                print("Data could not be saved")
+            } else {
+                self.createNewPhoto(photo, postid: firebase.key)
+            }
+        }
+    }
+
+    func createNewPhoto(photo: String, postid: String)
+    {
+        let photos = ["string": photo]
+        PHOTO_REF.childByAppendingPath(postid).childByAutoId().setValue(photos)
     }
 }

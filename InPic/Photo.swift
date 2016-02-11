@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-class Photo: UIImage {
-    
+class Photo: UIImageView {
+
 }
