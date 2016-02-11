@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-class Photo: NSObject {
-    var caption: String?
-    var image: UIImage?
-    var postID: String?
+class Photo: UIImageView {
+
 }

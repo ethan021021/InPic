@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import ImagePicker
 
-class MainFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ImagePickerDelegate {
+class MainFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ImagePickerDelegate, MainFeedTableViewCellDelegate {
 
     var postArray = [Post]()
     let imagePickerController = ImagePickerController()
@@ -18,9 +18,7 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     let image = Photo()
     var returnedImage = UIImage()
     var returnedString = ""
-
-    var didLoadImages: Bool!
-
+    var UID: String!
     let loggedInUser = NSUserDefaults.standardUserDefaults()
 
     @IBOutlet weak var tableView: UITableView!
@@ -28,7 +26,9 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         DataService.dataService.PHOTO_REF.keepSynced(true)
+        DataService.dataService.POST_REF.keepSynced(true)
         self.tableView.rowHeight = 360
+        self.loadData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,14 +38,38 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func loadData()
     {
-        DataService.dataService.POST_REF.queryOrderedByChild("timestamp").observeEventType(.ChildAdded, withBlock: { data in
-//            print("Data: \(data.value)")
-            let dataV = data.value as []
-            for fdn: FDataSnapshot in data.value as! NSArray
-            {
-                print("Data: \(fdn)")
-            }
-        })
+        DataService.dataService.POST_REF.queryOrderedByChild("timestamp").observeEventType(.ChildAdded, withBlock: { (data) in
+            let ref = DataService.dataService.PHOTO_REF.childByAppendingPath(data.key)
+            ref.observeEventType(.Value, withBlock: { (pdata) in
+                if let allData = pdata.children.allObjects as? [FDataSnapshot] {
+                    if allData.count > 0 {
+                        let snap = allData[0]
+                        if let imageString = snap.value["string"] as? String {
+                            let imageData = NSData(base64EncodedString: imageString, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)
+                            let imageDecoded = UIImage(data: imageData!)
+                            let post = Post()
+                            if let time = data.value.objectForKey("timestamp") {
+                                post.timestamp = String(time)
+                            }
+                            post.key = data.key
+                            post.caption = data.value.objectForKey("caption") as? String
+                            let photo = Photo()
+                            photo.image = imageDecoded!
+                            post.photo = photo
+                            self.postArray.append(post)
+                            self.sortByTimestamp()
+                            dispatch_async(dispatch_get_main_queue(), { 
+                                self.tableView.reloadData()
+                            })
+                        }
+                    }
+                }
+                }, withCancelBlock: { (error) in
+                    print(error)
+            })
+            }) { (error) in
+
+        }
     }
 
     func sortByTimestamp()
@@ -57,14 +81,9 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         if self.loggedInUser.stringForKey("uid") == nil {
             self.performSegueWithIdentifier("goLogInSegue", sender: nil)
         } else {
-            self.loadData()
+            UID = self.loggedInUser.stringForKey("uid")
             self.tableView.reloadData()
         }
-        print(self.loggedInUser.stringForKey("uid"))
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        self.tabBarController?.tabBar.hidden = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,19 +107,20 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MainFeedCell", forIndexPath: indexPath) as! MainFeedTableViewCell
 
-        // Configure the cell...
-        if (didLoadImages == true)
-        {
-            if let photoFoud = self.postArray[indexPath.section].photo {
-                cell.cellImageView.image = photoFoud.image
-            } else {
-                cell.cellImageView.image = UIImage(named: "image")
-            }
-        } else {
+        cell.delegate = self
 
-        }
+        cell.cellImageView.image = self.postArray[indexPath.section].photo?.image
 
         return cell
+    }
+
+    func deletePost(cell: UITableViewCell) {
+        let indexPath = self.tableView.indexPathForCell(cell)
+        let key = self.postArray[(indexPath?.section)!].key
+        DataService.dataService.PHOTO_REF.childByAppendingPath(key).removeValue()
+        DataService.dataService.POST_REF.childByAppendingPath(key).removeValue()
+        self.postArray.removeAtIndex((indexPath?.section)!)
+        self.tableView.reloadData()
     }
 
     @IBAction func onUploadButtonPressed(sender: UIBarButtonItem) {
@@ -143,12 +163,13 @@ class MainFeedViewController: UIViewController, UITableViewDataSource, UITableVi
         let label = UILabel(frame: CGRect(x:0, y:0, width: self.view.frame.width, height: 30))
         label.font.fontWithSize(CGFloat(8))
         label.textAlignment = .Center
-        //        label.text = self.postArray[section].caption
+        label.text = self.postArray[section].caption
         headerView.addSubview(label)
 
         return headerView
 
     }
+
 
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30

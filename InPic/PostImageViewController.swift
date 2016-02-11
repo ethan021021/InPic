@@ -37,7 +37,9 @@ class PostImageViewController: UIViewController {
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
             let imageData: NSData = UIImageJPEGRepresentation(self.postImage!, 1.0)!
             self.base64String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            DataService.dataService.createNewPost(self.base64String as String, caption: self.captionTextField.text!)
+            let timestamp = NSDate(timeIntervalSinceNow: NSTimeInterval())
+            let uid = NSUserDefaults.standardUserDefaults().valueForKey("uid") as? String
+            DataService.dataService.createNewPost(self.captionTextField.text!, timestamp: "\(timestamp)", photo: self.base64String as String, userposted: uid!)
         }
         self.navigationController?.popViewControllerAnimated(true)
     }

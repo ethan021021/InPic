@@ -12,4 +12,7 @@ import UIKit
 class Post: NSObject {
     var timestamp: String?
     var photo: Photo?
+    var caption: String?
+    var key: String?
+    var userPosted: String?
 }

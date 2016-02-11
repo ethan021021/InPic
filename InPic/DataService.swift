@@ -45,23 +45,21 @@ class DataService {
         USER_REF.childByAppendingPath(uid).setValue(user)
     }
 
-    func createNewPost(photo: String, caption: String) {
-        let userid = NSUserDefaults.standardUserDefaults().valueForKey("uid") as! String
-        let postRef = POST_REF.childByAutoId()
-        let timestamp = NSDate(timeIntervalSinceNow: NSTimeInterval())
-        let post = ["userid": userid, "timestamp": "\(timestamp)"]
-        postRef.setValue(post) { (error, firebase) in
-            self.createNewPhoto(photo, caption: caption, postid: firebase.key)
+    func createNewPost(caption: String, timestamp: String, photo: String, userposted: String)
+    {
+        let post = ["caption": caption, "timestamp": timestamp, "userposted": userposted]
+        POST_REF.childByAutoId().setValue(post) { (error, firebase) in
+            if error != nil {
+                print("Data could not be saved")
+            } else {
+                self.createNewPhoto(photo, postid: firebase.key)
+            }
         }
     }
 
-    func createNewPhoto(photo: String, caption: String, postid: String) {
-        let photoRef = PHOTO_REF.childByAutoId()
-        let photos = ["string": photo, "caption": caption, "postid": postid]
-        photoRef.setValue(photos) { (error, firebase) in
-            let uPostRef = Firebase(url: "\(BASE_URL)/posts/\(postid)")
-            let updatePost = ["photoid": firebase.key]
-            uPostRef.updateChildValues(updatePost)
-        }
+    func createNewPhoto(photo: String, postid: String)
+    {
+        let photos = ["string": photo]
+        PHOTO_REF.childByAppendingPath(postid).childByAutoId().setValue(photos)
     }
 }
