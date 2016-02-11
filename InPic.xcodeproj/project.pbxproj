@@ -28,6 +28,7 @@
 		A209D0761C642572004D922D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A209D0751C642572004D922D /* Post.swift */; };
 		A209D07A1C643BFB004D922D /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A209D0791C643BFB004D922D /* CommentTableViewCell.swift */; };
 		A24D16BD1C6B24F400EC2F90 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24D16BC1C6B24F400EC2F90 /* CommentsViewController.swift */; };
+		A24D16C21C6BA5FC00EC2F90 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A24D16C01C6BA5FC00EC2F90 /* Profile.storyboard */; };
 		A25CE1121C696C1A0032EB8B /* PostImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25CE1111C696C1A0032EB8B /* PostImageViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		A209D0751C642572004D922D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A209D0791C643BFB004D922D /* CommentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		A24D16BC1C6B24F400EC2F90 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		A24D16C11C6BA5FC00EC2F90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		A25CE1111C696C1A0032EB8B /* PostImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImageViewController.swift; sourceTree = "<group>"; };
 		C7D15A5E35A94D56CAC9F622 /* Pods_InPic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InPic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2835494506F3144AE25B4D0 /* Pods-InPic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InPic.release.xcconfig"; path = "Pods/Target Support Files/Pods-InPic/Pods-InPic.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				795010191C6414380095FD6F /* Main.storyboard */,
+				A24D16C01C6BA5FC00EC2F90 /* Profile.storyboard */,
 				A209D06F1C641D05004D922D /* MainFeedTableViewCell.swift */,
 				A209D0791C643BFB004D922D /* CommentTableViewCell.swift */,
 			);
@@ -239,6 +242,7 @@
 			files = (
 				795010201C6414380095FD6F /* LaunchScreen.storyboard in Resources */,
 				7950101D1C6414380095FD6F /* Assets.xcassets in Resources */,
+				A24D16C21C6BA5FC00EC2F90 /* Profile.storyboard in Resources */,
 				7950101B1C6414380095FD6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +340,14 @@
 				7950101F1C6414380095FD6F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A24D16C01C6BA5FC00EC2F90 /* Profile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A24D16C11C6BA5FC00EC2F90 /* Base */,
+			);
+			name = Profile.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

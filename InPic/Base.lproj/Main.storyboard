@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="InPic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIViewController-BYZ-38-t0r" id="BYZ-38-t0r" customClass="LoginViewController" customModule="InPic" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -493,7 +493,7 @@
                     <navigationItem key="navigationItem" title="Activity Feed" id="jbc-ue-P8t">
                         <barButtonItem key="leftBarButtonItem" title="Profile" id="2Zs-HY-mKJ">
                             <connections>
-                                <segue destination="roP-rG-Z4p" kind="show" id="DPV-1o-Tiq"/>
+                                <segue destination="zDm-BZ-H5a" kind="show" id="DPV-1o-Tiq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PDu-gA-9VE">
@@ -531,6 +531,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kbm-iJ-VS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1177" y="1749"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="3Fi-gd-MCe">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="zDm-BZ-H5a" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e4H-Fg-XYx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="725"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
